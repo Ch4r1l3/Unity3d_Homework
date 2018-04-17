@@ -13,11 +13,14 @@ namespace UFO
         GUIStyle style;
         GUIStyle textstyle;
         GUIStyle buttonStyle;
-
+        float nextFireTime;
+        public float fireRate = 0.25f;
+        public float fireSpeed = 500f;
+        public GameObject bullet;
         void Start()
         {
             action = Director.getInstance().current as UserAction;
-
+            bullet = Instantiate(Resources.Load("Perfabs/Bullet", typeof(GameObject)), new Vector3(0,6,0), Quaternion.identity, null) as GameObject;
             style = new GUIStyle();
             style.fontSize = 40;
             style.alignment = TextAnchor.MiddleCenter;
@@ -30,6 +33,7 @@ namespace UFO
             buttonStyle.fontSize = 30;
             state = GameState.Start;
             score = 0;
+            nextFireTime = 0;
             round = 1;
         }
 
@@ -73,6 +77,27 @@ namespace UFO
             {
                 GUI.Label(new Rect(26, 30, 100, 50), "Score: "+score, textstyle);
                 GUI.Label(new Rect(30, 60, 100, 50), "Round: " + round, textstyle);
+            }
+        }
+
+
+        void Update()
+        {
+            if (state==GameState.Running&& Input.GetMouseButtonDown(0) && Time.time > nextFireTime)
+            {
+                nextFireTime = Time.time + fireRate;
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                //bullet.rigidbody.velocity = Vector3.zero;                     
+                bullet.transform.position = transform.position;
+                bullet.GetComponent<Rigidbody>().AddForce(ray.direction * fireSpeed, ForceMode.Impulse);
+
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Disk")
+                {
+                    hit.collider.gameObject.SetActive(false);
+                }
             }
         }
     }

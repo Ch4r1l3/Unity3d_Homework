@@ -13,8 +13,8 @@ namespace UFO
         Vector3 force;
         public DiskController()
         {
-            emissionPositon = new Vector3(1.5f, 6.2f, -10f);
-            emissionDiretion = new Vector3(5.5f, 8.0f, 14f);
+            emissionPositon = new Vector3(1.5f, 4.2f, -10f);
+            emissionDiretion = new Vector3(5.5f, 13.0f, 14f);
         }
 
         public void fireDisk()
@@ -26,9 +26,10 @@ namespace UFO
             int chooseColor = Random.Range(0, 7);
             disk.GetComponent<Renderer>().material.color = Colors[chooseColor];
             disk.transform.position = new Vector3(Random.Range(-2.5f, 2.5f), emissionPositon.y, emissionPositon.z);
+            disk.transform.rotation = Quaternion.identity;
             emissionDiretion.x = emissionDiretion.x * Random.Range(-1, 1);
             disk.SetActive(true);
-            force = emissionDiretion * Random.Range(1.0f, 2.0f) / 15;
+            force = emissionDiretion * Random.Range(1.0f, 1.1f) / 15;
             disk.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
         }
 
@@ -41,8 +42,19 @@ namespace UFO
         {
             var factory = DiskFactory.getInstance();
             disk.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            disk.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             disk.SetActive(false);
             factory.freeDisk(disk);
+        }
+
+        public GameObject getGameObject()
+        {
+            return disk;
+        }
+
+        public int getScore()
+        {
+            return disk.GetComponent<Disk>().score;
         }
     }
 }

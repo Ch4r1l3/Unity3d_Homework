@@ -32,6 +32,13 @@ namespace UFO
                     disks.RemoveAt(i);
                     i--;
                 }
+                else if (!disks[i].getGameObject().activeInHierarchy)
+                {
+                    userGui.score += disks[i].getScore();
+                    disks[i].freeDisk();
+                    disks.RemoveAt(i);
+                    i--;
+                }
             }
         }
 
