@@ -11,6 +11,7 @@ namespace UFO
         private SceneController scene;
         readonly float emissionTime=1.0f;
         UserGui userGui;
+        int fire_num = 0;
 
         void Awake()
         {
@@ -31,6 +32,7 @@ namespace UFO
                     disks[i].freeDisk();
                     disks.RemoveAt(i);
                     i--;
+                    userGui.hitGround++;
                 }
                 else if (!disks[i].getGameObject().activeInHierarchy)
                 {
@@ -44,24 +46,35 @@ namespace UFO
 
         void FixedUpdate()
         {
-            if (userGui.state != GameState.Running)
+            if (userGui.state != GameState.Running&&fire_num<10)
                 return;
             if (timeToNextEmission > emissionTime)
             {
                 timeToNextEmission = 0;
-                emissionDisks();
+                emissionDisks((Disk.DiskLevel)(userGui.round-1));
+                fire_num++;
+                if (fire_num >= 10)
+                {
+                    userGui.round++;
+                    userGui.hitGround = 0;
+                    fire_num = 0;
+                }
             }
             else
             {
                 timeToNextEmission += Time.deltaTime;
             }
+            if (userGui.hitGround > 3)
+                userGui.state = GameState.Fail;
+            if (userGui.round > 3)
+                userGui.state = GameState.Win;
         }
 
-        void emissionDisks()
+        void emissionDisks(Disk.DiskLevel level)
         {
             var d = new DiskController();
             disks.Add(d);
-            d.fireDisk();
+            d.fireDisk(level);
         }
 
         public void loadResources()
@@ -70,16 +83,7 @@ namespace UFO
             disks = new List<DiskController>();
             timeToNextEmission = 0;
         }
-
-        public void start()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void fire()
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
         public void restart()
         {
@@ -88,6 +92,7 @@ namespace UFO
                 disks[0].freeDisk();
                 disks.RemoveAt(0);
             }
+            userGui.restart();
         }
     }
 

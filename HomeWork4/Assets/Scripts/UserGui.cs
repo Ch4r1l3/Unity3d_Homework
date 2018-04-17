@@ -8,7 +8,7 @@ namespace UFO
     public class UserGui : MonoBehaviour
     {
         public GameState state { get; set; }
-        public int score,round;
+        public int score,round,hitGround;
         private UserAction action;
         GUIStyle style;
         GUIStyle textstyle;
@@ -20,7 +20,7 @@ namespace UFO
         void Start()
         {
             action = Director.getInstance().current as UserAction;
-            bullet = Instantiate(Resources.Load("Perfabs/Bullet", typeof(GameObject)), new Vector3(0,6,0), Quaternion.identity, null) as GameObject;
+            bullet = Instantiate(Resources.Load("Perfabs/Bullet", typeof(GameObject)), new Vector3(-10,-6,0), Quaternion.identity, null) as GameObject;
             style = new GUIStyle();
             style.fontSize = 40;
             style.alignment = TextAnchor.MiddleCenter;
@@ -33,14 +33,16 @@ namespace UFO
             buttonStyle.fontSize = 30;
             state = GameState.Start;
             score = 0;
+            hitGround = 0;
             nextFireTime = 0;
             round = 1;
         }
 
-        void restart()
+        public void restart()
         {
             score = 0;
             round = 1;
+            hitGround = 0;
         }
 
         void OnGUI()
@@ -77,6 +79,7 @@ namespace UFO
             {
                 GUI.Label(new Rect(26, 30, 100, 50), "Score: "+score, textstyle);
                 GUI.Label(new Rect(30, 60, 100, 50), "Round: " + round, textstyle);
+                GUI.Label(new Rect(47, 90, 100, 50), "HitGround: " + hitGround, textstyle);
             }
         }
 

@@ -6,8 +6,6 @@ namespace UFO
 {
     public interface UserAction
     {
-        void start();
-        void fire();
         void restart();
     }
 }

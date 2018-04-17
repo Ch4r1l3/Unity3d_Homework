@@ -7,6 +7,7 @@ namespace UFO
     public class DiskController
     {
         public Color[] Colors = { Color.black, Color.blue, Color.cyan, Color.green, Color.grey, Color.red, Color.yellow };
+        private float[] speeds = { 1, 1.1f, 1.4f };
         GameObject disk;
         Vector3 emissionPositon;
         Vector3 emissionDiretion;
@@ -17,10 +18,10 @@ namespace UFO
             emissionDiretion = new Vector3(5.5f, 13.0f, 14f);
         }
 
-        public void fireDisk()
+        public void fireDisk(Disk.DiskLevel level)
         {
             var factory = DiskFactory.getInstance();
-            disk = factory.getDisk(Disk.DiskLevel.Easy);
+            disk = factory.getDisk(level);
             var diskScale = Random.Range(1, 3);
             disk.transform.localScale *= diskScale;
             int chooseColor = Random.Range(0, 7);
@@ -29,7 +30,7 @@ namespace UFO
             disk.transform.rotation = Quaternion.identity;
             emissionDiretion.x = emissionDiretion.x * Random.Range(-1, 1);
             disk.SetActive(true);
-            force = emissionDiretion * Random.Range(1.0f, 1.1f) / 15;
+            force = emissionDiretion * Random.Range(1.0f, 1.1f)*speeds[(int)level]*disk.GetComponent<Disk>().speed / 150;
             disk.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
         }
 
