@@ -19,8 +19,7 @@ namespace UFO
 
         public void SSActionEvent(SSAction sourse, SSActionEventType events = SSActionEventType.Completed)
         {
-            if (transform.position.y <= 0)
-                Destroy(gameObject.GetComponent<Rigidbody>());
+            
         }
     }
 
