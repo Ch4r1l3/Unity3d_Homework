@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 13
-  productGUID: cee9792572adcdf4eb82c765fd671952
+  productGUID: d47da5e5f1783924698d24ccc7d519bb
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
@@ -12,7 +12,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: HomeWork8
+  productName: HomeWork10
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -521,14 +521,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: HomeWork8
+  metroPackageName: HomeWork10
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: HomeWork8
+  metroApplicationDescription: HomeWork10
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -603,8 +603,8 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 47479965-5fbe-4626-8664-4ff0f132167d
-  projectName: HomeWork8
+  cloudProjectId: e3f13605-5a8f-43d0-ae43-4cd03b1e7ead
+  projectName: HomeWork10 (1)
   organizationId: charlie_ele
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
