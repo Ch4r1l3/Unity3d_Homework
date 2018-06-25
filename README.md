@@ -1,3 +1,0 @@
-scene在Kawaii_Tanks_Project/Kawaii_Tanks_Assets/Scenes/Town
-
-因为他做得比较好了，我就不再做一个场景了
